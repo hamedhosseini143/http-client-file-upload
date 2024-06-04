@@ -1,0 +1,5 @@
+name: "[CUSTOM] -Upload Service API"
+apiVersion: "1.0"
+description: "This API is used to upload files to the server."
+imports:
+  - "resources/file_upload_service.yml"

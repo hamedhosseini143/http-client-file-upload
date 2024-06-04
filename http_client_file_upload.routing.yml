@@ -1,0 +1,7 @@
+http_client_file_upload.upload:
+  path: '/http-client-file-upload/upload'
+  defaults:
+    _title: 'Upload'
+    _controller: '\Drupal\http_client_file_upload\Controller\HttpClientFileUploadController'
+  requirements:
+    _permission: 'access content'

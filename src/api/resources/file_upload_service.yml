@@ -1,0 +1,31 @@
+operations:
+  upload:
+    httpMethod: "POST"
+    uri: "/file/upload/node/article/field_image"
+    summary: "Upload a file to the server."
+    parameters:
+      content-type:
+        location: "header"
+        default: "application/octet-stream"
+        required: true
+      Authorization:
+        location: "header"
+        type: "string"
+        required: true
+      Content-Disposition:
+        location: "header"
+        type: "string"
+        required: true
+      file:
+        location: "body"
+        type: "string"
+        required: true
+        description: "The content of the file being uploaded."
+module:
+  FileUploadResponse:
+    type: "object"
+    location: "json"
+    properties:
+      fid:
+        type: "integer"
+        description: "The file ID."

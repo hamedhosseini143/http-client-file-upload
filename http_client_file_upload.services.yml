@@ -1,0 +1,4 @@
+services:
+  http_client_file_upload.upload:
+    class: Drupal\http_client_file_upload\FileUpload
+    arguments: ['@http_client']

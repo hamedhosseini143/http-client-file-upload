@@ -1,0 +1,5 @@
+api_file_upload_service:
+  title: 'File Upload Service'
+  api_path: "src/api/file_upload_service.yml"
+  config:
+    base_uri: "https://srdr10.ddev.site"
