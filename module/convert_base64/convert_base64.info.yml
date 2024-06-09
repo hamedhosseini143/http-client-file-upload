@@ -1,0 +1,5 @@
+name: 'convert base64'
+type: module
+description: 'convert base 64'
+package: Custom
+core_version_requirement: ^10 || ^11

@@ -16,24 +16,17 @@ final class HttpClientFileUploadController extends ControllerBase {
    * Builds the response.
    */
   public function __invoke(): array {
-    // file on local
-    $filePath = 'https://srdr10.ddev.site/sites/default/files/2024-06/images.jpeg';
-
-    // upload file by php service
-    $fileUploadBase64 = Drupal::service('http_client_file_upload.base64')->base64();
-    //    $fileUpload = Drupal::service('http_client_file_upload.upload')
-    //      ->upload('node', 'article', 'field_image', 'https://srdr10.ddev.site/sites/default/files/2024-06/1.jpg');
-    //
-    // file upload by http client manager service
-    $token = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjZjNWUwY2FiNDQ5NjhkMDQ1MWZmZTRiOGQ0MzhiYmRiYTE5ZmNiZGVjN2Y1NTBmMWViYTg2NDcxMjZkN2MwYmRiOGZlNTZmYzAxNTc4NGIwIn0.eyJhdWQiOiJiWFVZSWh2NU9FUktKM0paeDJIcjl6eC0yam9kTkk3bF90VlB3TjhyeXpzIiwianRpIjoiNmM1ZTBjYWI0NDk2OGQwNDUxZmZlNGI4ZDQzOGJiZGJhMTlmY2JkZWM3ZjU1MGYxZWJhODY0NzEyNmQ3YzBiZGI4ZmU1NmZjMDE1Nzg0YjAiLCJpYXQiOjE3MTc4NDcyMjAsIm5iZiI6MTcxNzg0NzIyMCwiZXhwIjoxNzE3OTMzMjIwLjE1NDA4MSwic3ViIjoiMSIsInNjb3BlIjpbImF1dGhlbnRpY2F0ZWQiLCJjb250ZW50X2VkaXRvciJdfQ.w1yd2Hg8en28JLfMRMvBr-j8Q2MN3GZ75tEW3tNYpc1V5kJmHiK7SGWXvT8Jhd8EC2TZVar5HyvzaNHMwDrVttKrq8O02AJsSYN7uTrjnyFKmc2mzysG0gIZY6qd3xJZY9SSFHBKi9YErzI876lApVp6lP7M0mZ-SG8cFOebd-rFa6EdTjbnjuKBcrscyRHnW6df94i9jkUVBWpYb4jlJP6QdrMlVo9rjkOslUgNeCBr1oYLl2D6VGPDLiiX4071x-S9dzmGiOp53OL7uOeCo9qAtuxsoOefsyS3Or8u-ibx1VcuROUUt0A3ZcNP60GJxC_W4gItRw45SGhfHxgN3QyqWM-cFgUxrdv0giOmSChwAy-AjdgJtJoXfJ54D-DpszYKXhqJgNWNXbpQH9oL13IYe2EXLZX8SSnZRcfv2pkkQP6YS-0P8Ankx8oszoAmLpeo17l0LkLLD63_lkuY1-OwQorERH9ugibcuPEl5UsJLWXXuFf8ijkBfvK6koWJ-NZgq_fMwZl2b086QwNdC0Oc4RLA6OtdzyM0JoItj3vFmcNEYr4Yoxia8bJiP_2z1cmRG3aM8FcgvBefk_s1nH6l_hgVgSVejuBzD5baiiuQ-U5_nYf8hzu47p1Tzxb9WnC7UCm3SMBgEl5LDSi_R931EUL8qlWsZ8OXrJyVt6A';
+    $filePath = 'https://srdr10.ddev.site/sites/default/files/test01.jpeg';
+    $fileBase64 = Drupal::service('convert_base64.convert')
+      ->convertFileToBase64($filePath);
+    $token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImQ0NDBhMTNmMWQxOWVlNDM4ZTgzOTQzZTc1ZmY3ZDgyYTg0ZDc5MTQ3YzI3MDNmYzNiODZhMTZmZWE0ZDMzYzE3MzI1OGMzNmIwNTUyZGQxIn0.eyJhdWQiOiJiWFVZSWh2NU9FUktKM0paeDJIcjl6eC0yam9kTkk3bF90VlB3TjhyeXpzIiwianRpIjoiZDQ0MGExM2YxZDE5ZWU0MzhlODM5NDNlNzVmZjdkODJhODRkNzkxNDdjMjcwM2ZjM2I4NmExNmZlYTRkMzNjMTczMjU4YzM2YjA1NTJkZDEiLCJpYXQiOjE3MTc5MzMyOTcsIm5iZiI6MTcxNzkzMzI5NywiZXhwIjoxNzE4MDE5Mjk3LjEyODIxNiwic3ViIjoiMSIsInNjb3BlIjpbImF1dGhlbnRpY2F0ZWQiLCJjb250ZW50X2VkaXRvciJdfQ.eT22U54FnsUUCl3rdtjwJOKnOPWyrcmASVPjDqxln_k1hMpPQqF-AHubzH9EQxNZRp1w9w1EYojcjKiUIoqKEOxj2Wyd7XsY63ForBjJa92qWa9PPw48gNFPz8KwviHO0gSeuhHIfmDaOcJq15Yu204jyZth9Jd8XJuDn9LIA3-Urw5BGK56_tIYrA5pKiFgyRP5PTDPP-07Ff9UDfM1dI7TzRkTAek-4Tjpd1fivY7erOU3UnR2LRiM9qCpZR8V-egOnU1B_kroWTVUnu2tiTbu5UI0QMNhfwI_7mZ6Pb5KzPahvZBRPJOBCeibIx0gqT-KIHIHiWkcVjTihinYO-s3Kzv73AtcDOm0CnkMEgDpA3ZZU9OVeapCYQwsLuSiDYWXPmsUVSeKEj17EJ6uwUsJeMxFMobkrftdOX5eTjMGtZciIOm12EYXJKq5LyCd-2ruxgZ1Qz7a20tW-4zt1H_ZP-H2qRNB15ZhQm4zXZir6mRYpdpx3nojPaK0rAhb07uRBe_aeqXd86AdZ_UnVn0rcB-IXxN77t-HsMwRTC8EwN9HGiqkZhDV-lD6Fth7QBZkjFMpwV4EofozrhtsPJkEuNh_0y-dLwqy2MrpGzwmpaid8NQBJU97oiyFsX2Kw9rrfZsEYTlMrsi4Zo5PD1b0bkJCJjv9JGo0HjPEgvs";
     $fileUpload = Drupal::service('http_client_manager.factory')
       ->get('api_file_upload_service');
     $fileUpload->call(
       'upload', [
-        'content-type' => 'application/octet-stream',
-        'Authorization' => $token,
-        'Content-Disposition' => 'file; filename="001.png"',
-        'file' => $filePath,
+        "Authorization" => $token,
+        'fileName' => 'hamedTest.jpeg',
+        'file' => $fileBase64,
       ]
     );
 

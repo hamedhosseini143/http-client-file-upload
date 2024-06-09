@@ -1,0 +1,4 @@
+services:
+  convert_base64.convert:
+    class: Drupal\convert_base64\FileConvertBase64
+    arguments: ['@file_system', '@entity_type.manager']

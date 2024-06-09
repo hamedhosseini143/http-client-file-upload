@@ -1,0 +1,5 @@
+name: 'rest file upload base64'
+type: module
+description: 'rest file upload base 64'
+package: Custom
+core_version_requirement: ^10 || ^11

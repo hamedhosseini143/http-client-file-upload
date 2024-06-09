@@ -1,26 +1,22 @@
 operations:
   upload:
     httpMethod: "POST"
-    uri: "/file/upload/node/article/field_image"
+    uri: "/api/rest-file-upload"
     summary: "Upload a file to the server."
     parameters:
-      content-type:
-        location: "header"
-        default: "application/octet-stream"
-        required: true
-      Authorization:
-        location: "header"
+      fileName:
+        location: "json"
         type: "string"
         required: true
-      Content-Disposition:
-        location: "header"
-        type: "string"
-        required: true
+        description: "The name of the file being uploaded."
       file:
-        location: "body"
+        location: "json"
         type: "string"
         required: true
         description: "The content of the file being uploaded."
+      Authorization:
+        location: "header"
+        type: "string"
 module:
   FileUploadResponse:
     type: "object"

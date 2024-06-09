@@ -1,8 +1,0 @@
-services:
-  http_client_file_upload.upload:
-    class: Drupal\http_client_file_upload\FileUpload
-    arguments: ['@http_client']
-
-  http_client_file_upload.base64:
-    class: Drupal\http_client_file_upload\FileUploadBase64
-    arguments: ['@http_client']

@@ -12,14 +12,11 @@ class HttpServiceApiWrapperContent extends HttpServiceApiWrapperBase {
     return $this->httpClientFactory->get('api_file_upload_service');
   }
 
-  public function fileUpload(string $file, string $contentType, string $authorization, string $contentDisposition):array {
+  public function fileUpload(string $file, string $fileName, $authorization): array {
     $data = [
-      'headers' => [
-        'Content-Type' => $contentType,
-        'Authorization' => $authorization,
-        'Content-Disposition' => $contentDisposition,
-      ],
-      'body' => $file,
+      'Authorization'=>$authorization,
+      'fileName' => $fileName,
+      'file' => $file,
     ];
 
     return $this->call(ApiCommands::FILE_UPLOAD->value, $data)->toArray();

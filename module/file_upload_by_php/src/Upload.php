@@ -2,14 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Drupal\http_client_file_upload;
+namespace Drupal\file_upload_by_php;
 
 use Drupal;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Utils;
 
-final class FileUpload {
+/**
+ * @todo Add class description.
+ */
+final class Upload {
 
   /**
    * @var \GuzzleHttp\Client
