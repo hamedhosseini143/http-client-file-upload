@@ -1,5 +1,10 @@
 name: 'http client file upload'
 type: module
 description: 'http client file upload'
-package: Custom
+package: client file upload
 core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:http_client_manager
+  - drupal:file
+  - drupal:rest_file_upload_base64
+  - drupal:convert_base64
