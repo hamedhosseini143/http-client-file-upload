@@ -34,20 +34,20 @@ final class Upload {
    *
    * @return array
    */
-  public function upload(string $entityTypeId, string $bundle, string $fieldName, string $filePath): array {
-    $baseUrl = 'https://srdr10.ddev.site';
-    $url = "{$baseUrl}/file/upload/{$entityTypeId}/{$bundle}/{$fieldName}";
-    $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQyMmRkOGVmMWFmNzRlY2JjNDI2ZmQ5NmQ5YzBiYjMzNjlkNjY2ZmVkNjQ0ZWYwYTQ2OWM0NTRhOGI3M2U5NGUwN2NhMGI4NWRjNGRiNTM2In0.eyJhdWQiOiJiWFVZSWh2NU9FUktKM0paeDJIcjl6eC0yam9kTkk3bF90VlB3TjhyeXpzIiwianRpIjoiNDIyZGQ4ZWYxYWY3NGVjYmM0MjZmZDk2ZDljMGJiMzM2OWQ2NjZmZWQ2NDRlZjBhNDY5YzQ1NGE4YjczZTk0ZTA3Y2EwYjg1ZGM0ZGI1MzYiLCJpYXQiOjE3MTc0ODk1ODgsIm5iZiI6MTcxNzQ4OTU4OCwiZXhwIjoxNzE3NDg5ODg4LjMyMzE2Mywic3ViIjoiMSIsInNjb3BlIjpbImF1dGhlbnRpY2F0ZWQiLCJjb250ZW50X2VkaXRvciJdfQ.cmrvfkl6lcnDRgA1lIqmnPN3YdyQvLagjvAii6RInaEoDR5Sr0FV3RGBbWzS6yf449gn8o2lLeSNSNUshxAuigfh33Q4WO0gwVowrQmw4mCWi11rUZo8TmA9wBl6_8xU-a_TNDChnVOb7j6msfBLw-5VSuK_AaX6g1OUIOks1MjSw406VQGeguRoCbrAassrJZC_xF4nVPxtJ8jRG7HvQf0gZ3jquzTR8lsq1YQsPqhac12NXPiA6FazANfx8rwkDkxL_6GchU0Q1z3BhdxgIG8xNBaX6hd-O7k4_sRZhcQUOVl5N5WTmodgqYfhoqCK8YU3EhvCu3HWEZCnaaOCbY5014kOOnll72njPooCKhx_WrBY92d89JCEDCTeNCVpOoj29WbcByX4I9PgErIMLsJEwBATF9RFqSjVAE1Tc1sY8gKpgSyh2yILvwjz4spj-QFxaKWXJVRGQ01yfL1ibyfNgEjo4iRivsBm4QyAUfuA2V2YTEIvR8PbfJJCOTHpstGckI4hGVFF6ijJMSzQvFCIcE9Dsb_WAVngXJhjHsWa9zgB5FP17ONEvPpdralIYXM-Vk9cgBgq8apKjXMLJjpVssmJwIlfcI51wver-F3i8pay81GiZBBpOXYiYMxwEOHBI9X57ScLHpHDdnGIZAW3bs_23PAH2va8c2Z_iTQ';
-    $fileStream = Utils::tryFopen($filePath, 'r');
-    $stream = Utils::streamFor($fileStream);
+  public function upload(string $filePath, string $fileName): array {
+    $url = "https://srdr10.ddev.site/api/rest-file-upload";
+    $token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImQ0NDBhMTNmMWQxOWVlNDM4ZTgzOTQzZTc1ZmY3ZDgyYTg0ZDc5MTQ3YzI3MDNmYzNiODZhMTZmZWE0ZDMzYzE3MzI1OGMzNmIwNTUyZGQxIn0.eyJhdWQiOiJiWFVZSWh2NU9FUktKM0paeDJIcjl6eC0yam9kTkk3bF90VlB3TjhyeXpzIiwianRpIjoiZDQ0MGExM2YxZDE5ZWU0MzhlODM5NDNlNzVmZjdkODJhODRkNzkxNDdjMjcwM2ZjM2I4NmExNmZlYTRkMzNjMTczMjU4YzM2YjA1NTJkZDEiLCJpYXQiOjE3MTc5MzMyOTcsIm5iZiI6MTcxNzkzMzI5NywiZXhwIjoxNzE4MDE5Mjk3LjEyODIxNiwic3ViIjoiMSIsInNjb3BlIjpbImF1dGhlbnRpY2F0ZWQiLCJjb250ZW50X2VkaXRvciJdfQ.eT22U54FnsUUCl3rdtjwJOKnOPWyrcmASVPjDqxln_k1hMpPQqF-AHubzH9EQxNZRp1w9w1EYojcjKiUIoqKEOxj2Wyd7XsY63ForBjJa92qWa9PPw48gNFPz8KwviHO0gSeuhHIfmDaOcJq15Yu204jyZth9Jd8XJuDn9LIA3-Urw5BGK56_tIYrA5pKiFgyRP5PTDPP-07Ff9UDfM1dI7TzRkTAek-4Tjpd1fivY7erOU3UnR2LRiM9qCpZR8V-egOnU1B_kroWTVUnu2tiTbu5UI0QMNhfwI_7mZ6Pb5KzPahvZBRPJOBCeibIx0gqT-KIHIHiWkcVjTihinYO-s3Kzv73AtcDOm0CnkMEgDpA3ZZU9OVeapCYQwsLuSiDYWXPmsUVSeKEj17EJ6uwUsJeMxFMobkrftdOX5eTjMGtZciIOm12EYXJKq5LyCd-2ruxgZ1Qz7a20tW-4zt1H_ZP-H2qRNB15ZhQm4zXZir6mRYpdpx3nojPaK0rAhb07uRBe_aeqXd86AdZ_UnVn0rcB-IXxN77t-HsMwRTC8EwN9HGiqkZhDV-lD6Fth7QBZkjFMpwV4EofozrhtsPJkEuNh_0y-dLwqy2MrpGzwmpaid8NQBJU97oiyFsX2Kw9rrfZsEYTlMrsi4Zo5PD1b0bkJCJjv9JGo0HjPEgvs";
+    $fileBase64 = Drupal::service('convert_base64.convert')
+      ->convertFileToBase64($filePath);
     try {
       $response = $this->httpClient->request('POST', $url, [
         'headers' => [
-          'Content-Type' => 'application/octet-stream',
-          'Content-Disposition' => 'file; filename="1.jpg"',
           'Authorization' => 'Bearer ' . $token,
         ],
-        'body' => $stream,
+        'body' => [
+          'file' => $fileBase64,
+          'filename' => $fileName,
+        ],
       ]);
       return json_decode($response->getBody()->getContents(), TRUE);
     }

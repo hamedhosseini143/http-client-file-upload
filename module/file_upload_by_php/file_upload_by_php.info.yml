@@ -3,3 +3,5 @@ type: module
 description: 'upload file'
 package: client file upload
 core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:convert_base64
